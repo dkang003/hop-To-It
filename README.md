@@ -14,6 +14,8 @@ HTML5 | CSS3 | Javascript | Git | Github | Heroku | MongoDB | Express | React.js
 
 HHEHEHEEH ZAC WAS HERE!!! SUCKA!
 
+Joy's note
+
 ## Wireframes
 
 
