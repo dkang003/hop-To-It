@@ -1,0 +1,12 @@
+{
+  "name": "hop-To-It",
+  "version": "1.0.0",
+  "description": "------- ## What is it? Full-Stack app using MERN stack.  People can discover breweries near them or in specified area.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
