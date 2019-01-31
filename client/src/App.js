@@ -37,7 +37,9 @@ class App extends Component {
                     <Route exact path="/signup" render={(props) => {
                         return <Signup {...props} onSignupSuccess={this.onAuthSuccess} />
                     }} />
-                    <Route exact path="/profile" component={Profile} />
+                    <Route exact path="/profile" render={(props) => {
+                        return <Profile currentUser={this.state.currentUser} />
+                    }} />
                 </Switch>
             </Layout>
         )
