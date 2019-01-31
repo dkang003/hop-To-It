@@ -7,7 +7,7 @@ import Profile from './components/Profile';
 import Logout from './components/Logout';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
-import httpClient from './utilities/httpclient';
+import httpClient from './utilities/httpClient';
 
 class App extends Component {
     state = {
