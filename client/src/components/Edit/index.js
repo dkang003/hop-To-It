@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
 export default class Edit extends Component {
+    
     state = {
-        email: "",
+        email: this.props.currentUser.email,
         password: "",
-        name: ""
+        name: this.props.currentUser.name
     }
 
     handleChange = (e) => {

@@ -5,6 +5,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Logout from './components/Logout';
+import Edit from './components/Edit';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import httpClient from './utilities/httpClient';
@@ -39,6 +40,9 @@ class App extends Component {
                     }} />
                     <Route exact path="/profile" render={(props) => {
                         return <Profile currentUser={this.state.currentUser} />
+                    }} />
+                    <Route exact path="/edit" render={(props) => {
+                        return <Edit currentUser={this.state.currentUser} />
                     }} />
                 </Switch>
             </Layout>

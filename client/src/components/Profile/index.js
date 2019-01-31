@@ -7,20 +7,17 @@ import { userInfo } from 'os';
 
 class Profile extends Component {
     state = {
-        email: "", 
-        favorites: [],
-        name: "",
+        // email: "", 
+        // favorites: [],
+        // name: "",
         loading: true
     }
 
     componentDidMount() {
         let { currentUser } = this.props
         axios.get(`/api/users/${currentUser._id}`)
-            .then( res  => {
-                this.setState({ user: res.data.payload, loading: false}, function () {
-                    console.log(this.state)
-                })
-                debugger
+            .then(({ data })  => {
+                this.setState({ user: data.payload, loading: false})
             })
     }
     
@@ -28,13 +25,18 @@ class Profile extends Component {
 
 
     render () {
-        let { currentUser } = this.props
+        let { user, loading } = this.state;
+        debugger
+        if (loading) return <div></div>
         return (
             <div>
-                <h1> Profile </h1>
-                <Link to="/p" />
+                <h1> { user.name } Profile </h1>
+                <h3> { user.email } </h3>
+                <Link to="/edit">Edit Profile </Link>
                 <div className="row">
-                    <p>Insert favorite breweries here</p>
+                    <ul>
+                        <li>Brewery list starts here</li>
+                    </ul>
                 </div>
             </div>
         )
