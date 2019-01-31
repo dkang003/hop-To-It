@@ -32,7 +32,7 @@ class App extends Component {
                         return <Login {...props} onLoginSuccess={this.onAuthSuccess} />
                     }} />
                     <Route exact path="/logout" render={() => {
-                        return <Logout logOut={this.Logout} />
+                        return <Logout logout={this.logout} />
                     }} />
                     <Route exact path="/signup" render={(props) => {
                         return <Signup {...props} onSignupSuccess={this.onAuthSuccess} />
