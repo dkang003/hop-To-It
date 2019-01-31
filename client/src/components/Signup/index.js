@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import httpClient from '../../utilities/httpClient';
-import Axios from 'axios';
+import axios from 'axios';
 
-export default class Signup extends Component {
+class Signup extends Component {
     state = {
         email: "",
         password: "",
@@ -14,15 +14,25 @@ export default class Signup extends Component {
         this.setState({ [name]: value });
     };
 
-    // handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     let user = await httpClient.authenticate(this.state, "/api/users/authenticate");
-    //     if (user) {
-    //         this.props.onLoginSuccess();
-    //         this.props.history.push('/')
-    //     }
-    //     Axios.post.('/api/users' )
-    // }
+    handleSubmit = async (e) => {
+        debugger
+        e.preventDefault();
+        let newUser = await httpClient.authenticate(this.state, "/api/users/authenticate");
+        axios.post('/api/users', this.state)
+            .then( res => {
+                debugger
+                if (newUser) {
+                    this.props.onLoginSuccess();
+                    this.props.history.push('/')
+                }
+                // this.props.history.push(`/users/${res.data.newUser._id}`)
+
+            })
+        // debugger
+        
+        
+        debugger
+    };
 
     render() {
         let { email, password, name } = this.state;
@@ -64,3 +74,5 @@ export default class Signup extends Component {
         );
     }
 }
+
+export default Signup;
