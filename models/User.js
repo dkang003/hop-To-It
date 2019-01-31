@@ -4,8 +4,12 @@ const
     userSchema = new mongoose.Schema({
         name: { type: String },
         email: { type: String, required: true, unique: true },
-        password: { type: String, required: true }
-    })
+        password: { type: String, required: true },
+        favorites: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Brewery'
+        }]
+    }, {timestamps: true});
 
 // add a method to a user document object to create hashed password
 userSchema.methods.generateHash = function(password) {
