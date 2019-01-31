@@ -19,9 +19,6 @@ class Profile extends Component {
                 this.setState({ user: data.payload, loading: false})
             })
     }
-    
-
-
 
     render () {
         let { user, loading } = this.state;

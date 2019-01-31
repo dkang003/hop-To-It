@@ -45,7 +45,10 @@ class App extends Component {
                     <Route exact path="/edit" render={(props) => {
                         return <Edit {...props} currentUser={this.state.currentUser} />
                     }} />
-                    <Route exact path="/brewIndex" component={BrewIndex} />
+                    {/* VIP example from class */}
+                    <Route exact path="/brewIndex" render={() => {
+                        return this.state.currentUser ? <BrewIndex /> : <Redirect to="/login" />
+                    }} />
                 </Switch>
             </Layout>
         )
