@@ -17,7 +17,7 @@ class Login extends Component {
         let user = await httpClient.authenticate(this.state, "/api/users/authenticate");
         if (user) {
             this.props.onLoginSuccess();
-            this.props.history.push('/');
+            this.props.history.push('/brewIndex');
         }
     }
 

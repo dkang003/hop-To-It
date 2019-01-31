@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
-import { userInfo } from 'os';
+
 
 
 class Profile extends Component {
@@ -26,7 +25,6 @@ class Profile extends Component {
 
     render () {
         let { user, loading } = this.state;
-        debugger
         if (loading) return <div></div>
         return (
             <div>

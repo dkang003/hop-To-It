@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import Logout from './components/Logout';
 import Edit from './components/Edit';
+import BrewIndex from './components/BrewIndex';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import httpClient from './utilities/httpClient';
@@ -42,8 +43,9 @@ class App extends Component {
                         return <Profile currentUser={this.state.currentUser} />
                     }} />
                     <Route exact path="/edit" render={(props) => {
-                        return <Edit currentUser={this.state.currentUser} />
+                        return <Edit {...props} currentUser={this.state.currentUser} />
                     }} />
+                    <Route exact path="/brewIndex" component={BrewIndex} />
                 </Switch>
             </Layout>
         )

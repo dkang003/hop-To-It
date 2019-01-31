@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class Edit extends Component {
     
@@ -14,15 +15,21 @@ export default class Edit extends Component {
     };
 
     handleSubmit = (e) => {
-        // debugger
-        // e.preventDefault();
-        // axios.post('/api/users', this.state)
-        //     .then( res => {
-        //         let token = res.data.token;
-        //         httpClient.setToken(token);
-        //         this.props.history.push('/');
-                
-        //     })
+        e.preventDefault();
+        let { currentUser } = this.props
+        axios.patch(`/api/users/${currentUser._id}`, this.state)
+            .then( res => {
+                this.props.history.push('/profile');    
+            })
+    };
+
+    handleDelete = (e) => {
+        e.preventDefault();
+        let { currentUser } = this.props
+        axios.delete(`/api/users/${currentUser._id}`)
+            .then( res => {
+                this.props.history.push('/logout');
+            })
     };
 
     render() {
@@ -59,7 +66,7 @@ export default class Edit extends Component {
                                 />
                             <input type="submit" />
                         </form>
-                        <button>Delete</button>
+                        <button onClick={this.handleDelete}>Delete</button>
                     </div>
                 </div>
             </div>
