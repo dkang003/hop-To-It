@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Navbar from './Navbar';
 import './Layout.css';
 
-export default ({ children, currentUser }) => (
-    <div>
-        <Navbar currentUser={currentUser} />
-        <main className="container">
-            { children }
-        </main>
-    </div>
-)
+export default class Layout extends Component {
+    constructor(props) {
+        super(props);
+    }
+    render () {
+        
+        return (
+            <div>
+                <Navbar currentUser={this.props.currentUser} />
+                <main className="container">
+                    { this.props.children }
+                </main>
+            </div>
+        )
+    }
+}

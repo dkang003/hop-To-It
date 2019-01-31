@@ -14,24 +14,16 @@ class Signup extends Component {
         this.setState({ [name]: value });
     };
 
-    handleSubmit = async (e) => {
-        debugger
+    handleSubmit = (e) => {
+        // debugger
         e.preventDefault();
-        let newUser = await httpClient.authenticate(this.state, "/api/users/authenticate");
         axios.post('/api/users', this.state)
             .then( res => {
-                debugger
-                if (newUser) {
-                    this.props.onLoginSuccess();
-                    this.props.history.push('/')
-                }
-                // this.props.history.push(`/users/${res.data.newUser._id}`)
-
+                let token = res.data.token;
+                httpClient.setToken(token);
+                this.props.history.push('/');
+                
             })
-        // debugger
-        
-        
-        debugger
     };
 
     render() {
