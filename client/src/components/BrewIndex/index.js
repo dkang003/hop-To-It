@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Brewery from '../Brewery';
+import Map from '../Map';
+import './brewIndex.css';
 
 export default class BrewIndex extends Component {
     state = {
@@ -29,18 +31,20 @@ export default class BrewIndex extends Component {
         return(
             <div className="container">
                 <h1>BREWERY INDEX</h1>
-                <div className="map">
-                    <h1>Insert map here</h1>
-                </div>
-                <div className="container">
-                <ul>
-                    { breweries.map((brewery, i) => {
-                        // debugger
-                    // return <li key={i}>{ brewery.name }</li>
-                        // return <img key={i} src={brewery.images.large} />
-                    return <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li>
-                    })}
-                </ul>
+                <div className="main">
+                    <div className="mapContainer">
+                        <Map breweries={breweries} />
+                    </div>
+                    <div className="breweriesContainer">
+                        <ul>
+                            { breweries.map((brewery, i) => {
+                                // debugger
+                            // return <li key={i}>{ brewery.name }</li>
+                                // return <img key={i} src={brewery.images.large} />
+                            return <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li>
+                            })}
+                        </ul>
+                    </div>
                 </div>
             </div>
         )
