@@ -24,9 +24,13 @@ module.exports = {
     },
 
     update: (req, res) => {
-        Brewery.findByIdAndUpdate(req.params.id, (err, updatedBrewery) => {
+        Brewery.findById(req.params.id, (err, updatedBrewery) => {
             if (err) res.json({ success: false, err })
-            res.json({ success: true, updatedBrewery })
+            Object.assign(updatedBrewery, req.body)
+            updatedBrewery.save((err, updatedBrewery) => {
+                if (err) res.json({ success: false, err })
+                res.json({ success: true, updatedBrewery })
+            })
         })
     },
 
