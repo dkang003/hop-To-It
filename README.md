@@ -24,6 +24,7 @@ Front-end Packages installed:
 ## Some problems I ran into:
 1. Passing current user as props to our profile page
 2. Modeling our Brewery and Photo models
+3. Axios CORS block
 
 
 ## Things I didn't get to do/finish:
