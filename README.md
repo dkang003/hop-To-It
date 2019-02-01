@@ -22,6 +22,8 @@ Front-end Packages installed:
 
 
 ## Some problems I ran into:
+1. Passing current user as props to our profile page
+2. Modeling our Brewery and Photo models
 
 
 ## Things I didn't get to do/finish:
