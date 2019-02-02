@@ -18,8 +18,10 @@ export class MapContainer extends Component {
                 onClick={this.onMapClicked}
                 >
             { breweries.map((brewery, i) => {
+                const index = i + 1;
                 return <Marker
                 key={i}
+                label={index.toString()}
                 title={brewery.name}
                 name={brewery.name}
                 position={ {lat: `${brewery.location.lat}`, lng: `${brewery.location.lng}`}} />

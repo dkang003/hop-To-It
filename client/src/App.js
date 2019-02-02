@@ -7,6 +7,7 @@ import Profile from './components/Profile';
 import Logout from './components/Logout';
 import Edit from './components/Edit';
 import BrewIndex from './components/BrewIndex';
+import BrewShow from './components/BrewShow';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import httpClient from './utilities/httpClient';
@@ -48,6 +49,9 @@ class App extends Component {
                     {/* VIP example from class */}
                     <Route exact path="/brewIndex" render={() => {
                         return this.state.currentUser ? <BrewIndex /> : <Redirect to="/login" />
+                    }} />
+                    <Route exact path="/brewShow/:id" render={() => {
+                        return this.state.currentUser ? <BrewShow /> : <Redirect to="/login" />
                     }} />
                 </Switch>
             </Layout>

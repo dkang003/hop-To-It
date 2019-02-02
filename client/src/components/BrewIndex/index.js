@@ -3,6 +3,7 @@ import axios from 'axios';
 import Brewery from '../Brewery';
 import Map from '../Map';
 import './brewIndex.css';
+import { Link } from 'react-router-dom';
 
 export default class BrewIndex extends Component {
     state = {
@@ -38,7 +39,12 @@ export default class BrewIndex extends Component {
                     <div className="breweriesContainer">
                         <ul>
                             { breweries.map((brewery, i) => {
-                            return <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li>
+                            return <div>
+                                <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li>
+                                <Link brewery={ brewery } to={`/brewShow/${brewery.id}`}>{brewery.name}</Link>
+                                {/* <a href="/brewShow/${brewery.id}">{brewery.name}</a> */}
+                                </div>
+
                             })}
                         </ul>
                     </div>
