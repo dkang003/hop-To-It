@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Brewery from '../Brewery';
+import MapContainer from '../MapContainer';
+import './brewIndex.css';
 
 export default class BrewIndex extends Component {
     state = {
@@ -12,11 +14,11 @@ export default class BrewIndex extends Component {
 
         axios('/test')
         .then(res => { 
-            debugger
+            // debugger
             this.setState({ breweries: res.data.response.venues })
         })
         .catch(err => {
-            debugger
+            // debugger
         })
 
     }
@@ -24,23 +26,22 @@ export default class BrewIndex extends Component {
 
     render() {
         let { breweries } = this.state;
-        debugger
+        // debugger
 
         return(
-            <div className="container">
+            <div>
                 <h1>BREWERY INDEX</h1>
-                <div className="map">
-                    <h1>Insert map here</h1>
-                </div>
-                <div className="container">
-                <ul>
-                    { breweries.map((brewery, i) => {
-                        // debugger
-                    // return <li key={i}>{ brewery.name }</li>
-                        // return <img key={i} src={brewery.images.large} />
-                    return <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li>
-                    })}
-                </ul>
+                <div className="main">
+                    <div className="mapContainer">
+                        <MapContainer breweries={breweries} />
+                    </div>
+                    <div className="breweriesContainer">
+                        <ul>
+                            { breweries.map((brewery, i) => {
+                            return <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li>
+                            })}
+                        </ul>
+                    </div>
                 </div>
             </div>
         )
