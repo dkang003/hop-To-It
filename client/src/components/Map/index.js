@@ -4,6 +4,28 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 
 export class MapContainer extends Component {
+    state = {
+        showingInfoWindow : false,
+        activeMarker: {},
+        selectedPlace: {}
+    }
+
+    onMarkerClick = (props, marker, e) => {
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+    }
+
+    onMapClicked = ( props ) => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            })
+        }
+    };
 
     render() {
         let { breweries } = this.props;
@@ -19,13 +41,28 @@ export class MapContainer extends Component {
                 >
             { breweries.map((brewery, i) => {
                 const index = i + 1;
-                return <Marker
+                return ( 
+                <Marker
+                onClick={this.onMarkerClick}
                 key={i}
                 label={index.toString()}
-                title={brewery.name}
-                name={brewery.name}
+                brewery={brewery}
                 position={ {lat: `${brewery.location.lat}`, lng: `${brewery.location.lng}`}} />
+                )
             })}
+               
+                <InfoWindow
+                marker = {this.state.activeMarker}
+                visible = {this.state.showingInfoWindow}>
+                <div>
+                    { this.state.selectedPlace.brewery
+                    ? (
+                        <h3>{this.state.selectedPlace.brewery.name}</h3>
+                    ) : (
+                        <h3>Brewery Not Loaded</h3>
+                    )}
+                </div>    
+                </InfoWindow>
                 </Map>
             </div>
         );

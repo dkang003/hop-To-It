@@ -15,7 +15,7 @@ export default class BrewIndex extends Component {
 
         axios('/test')
         .then(res => { 
-            debugger
+            
             this.setState({ breweries: res.data.response.venues })
         })
         .catch(err => {
@@ -26,7 +26,6 @@ export default class BrewIndex extends Component {
 
     render() {
         let { breweries } = this.state;
-        debugger
 
         return(
             <div className="container">
