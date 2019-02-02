@@ -20,16 +20,17 @@ export default class BrewIndex extends Component {
         .catch(err => {
             debugger
         })
-
     }
     
 
     render() {
         let { breweries } = this.state;
         debugger
+
         return(
             <div className="container">
                 <h1>BREWERY INDEX</h1>
+
                 <div className="main">
                     <div className="mapContainer">
                         <Map breweries={breweries} />
@@ -37,9 +38,6 @@ export default class BrewIndex extends Component {
                     <div className="breweriesContainer">
                         <ul>
                             { breweries.map((brewery, i) => {
-                                // debugger
-                            // return <li key={i}>{ brewery.name }</li>
-                                // return <img key={i} src={brewery.images.large} />
                             return <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li>
                             })}
                         </ul>
