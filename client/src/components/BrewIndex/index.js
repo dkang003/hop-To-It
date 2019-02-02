@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Brewery from '../Brewery';
+// import Brewery from '../Brewery';
 import Map from '../Map';
 import './brewIndex.css';
 import { Link } from 'react-router-dom';
@@ -11,11 +11,11 @@ export default class BrewIndex extends Component {
     }
 
     componentDidMount () {
-        let { breweries } = this.state;
+        // let { breweries } = this.state;
 
         axios('/test')
         .then(res => { 
-            debugger
+            // debugger
             this.setState({ breweries: res.data.response.venues })
         })
         .catch(err => {
@@ -26,7 +26,7 @@ export default class BrewIndex extends Component {
 
     render() {
         let { breweries } = this.state;
-        debugger
+        // debugger
 
         return(
             <div className="container">
@@ -39,8 +39,8 @@ export default class BrewIndex extends Component {
                     <div className="breweriesContainer">
                         <ul>
                             { breweries.map((brewery, i) => {
-                            return <div>
-                                <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li>
+                            return <div key={i}>
+                                {/* <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li> */}
                                 <Link brewery={ brewery } to={`/brewShow/${brewery.id}`}>{brewery.name}</Link>
                                 {/* <a href="/brewShow/${brewery.id}">{brewery.name}</a> */}
                                 </div>

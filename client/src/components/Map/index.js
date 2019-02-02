@@ -4,8 +4,33 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 
 export class MapContainer extends Component {
+    state = {
+        showingInfoWindow: false,
+        activeMarker: {},
+        selectedPlace: {}
+      };
+     
+    onMarkerClick = (props, marker, e) => {
+        debugger
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+    }
+     
+    onMapClicked = (props) => {
+        debugger
+        if (this.state.showingInfoWindow) {
+          this.setState({
+            showingInfoWindow: false,
+            activeMarker: null
+          })
+        }
+    };
 
     render() {
+        // debugger
         let { breweries } = this.props;
         return(
             <div style={{ height: '30vh', width: '30vh'}}>
@@ -19,13 +44,30 @@ export class MapContainer extends Component {
                 >
             { breweries.map((brewery, i) => {
                 const index = i + 1;
-                return <Marker
-                key={i}
-                label={index.toString()}
-                title={brewery.name}
-                name={brewery.name}
-                position={ {lat: `${brewery.location.lat}`, lng: `${brewery.location.lng}`}} />
+                // debugger
+                return (
+                    <Marker
+                    onClick={this.onMarkerClick}
+                    key={i}
+                    label={index.toString()}
+                    brewery={brewery}
+                    position={ {lat: `${brewery.location.lat}`, lng: `${brewery.location.lng}`}} />
+                )
             })}
+                    <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}>
+                    <div>
+                        { this.state.selectedPlace.brewery
+                        ? (
+                            <h1>{this.state.selectedPlace.brewery.name}</h1>
+                        ) : (
+                            <h1>Nothing</h1>
+                        )
+                        }
+                    </div>
+                    </InfoWindow>
+            
                 </Map>
             </div>
         );
