@@ -5,13 +5,15 @@ import Map from '../Map';
 import './brewIndex.css';
 import { Link } from 'react-router-dom';
 
+
 export default class BrewIndex extends Component {
     state = {
-        breweries: []
+        breweries: [],
+        currentUser: null
     }
 
     componentDidMount () {
-        let { breweries } = this.state;
+        // let { breweries } = this.state;
 
         axios('/test')
         .then(res => { 
@@ -21,11 +23,12 @@ export default class BrewIndex extends Component {
         .catch(err => {
             debugger
         })
-    }
-    
+        this.setState({ currentUser: this.props.currentUser})
+    }   
 
     render() {
         let { breweries } = this.state;
+        let { currentUser } = this.props;
 
         return(
             <div className="container">
@@ -38,9 +41,17 @@ export default class BrewIndex extends Component {
                     <div className="breweriesContainer">
                         <ul>
                             { breweries.map((brewery, i) => {
-                            return <div>
-                                <li key={i}><Brewery key={brewery.id} brewery={ brewery } /></li>
-                                <Link brewery={ brewery } to={`/brewShow/${brewery.id}`}>{brewery.name}</Link>
+                            return <div key={i}>
+                                    <Link 
+                                        brewery={ brewery } 
+                                        to={`/brewShow/${brewery.id}`}>
+                                        {brewery.name}
+                                    </Link>
+                                    <Brewery 
+                                        currentUser={ currentUser }
+                                        brewery={ brewery }
+                                        onClick={this.handleClick}
+                                    />
                                 {/* <a href="/brewShow/${brewery.id}">{brewery.name}</a> */}
                                 </div>
 

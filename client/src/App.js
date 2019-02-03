@@ -47,8 +47,8 @@ class App extends Component {
                         return <Edit {...props} currentUser={this.state.currentUser} />
                     }} />
                     {/* VIP example from class */}
-                    <Route exact path="/brewIndex" render={() => {
-                        return this.state.currentUser ? <BrewIndex /> : <Redirect to="/login" />
+                    <Route exact path="/brewIndex" render={(props) => {
+                        return this.state.currentUser ? <BrewIndex {...props} currentUser={this.state.currentUser}/> : <Redirect to="/login" />
                     }} />
                     <Route exact path="/brewShow/:id" render={() => {
                         return this.state.currentUser ? <BrewShow /> : <Redirect to="/login" />

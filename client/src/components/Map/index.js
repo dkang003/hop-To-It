@@ -57,7 +57,13 @@ export class MapContainer extends Component {
                 <div>
                     { this.state.selectedPlace.brewery
                     ? (
+                        <div>
                         <h3>{this.state.selectedPlace.brewery.name}</h3>
+                        <p>{this.state.selectedPlace.brewery.location.address}</p>
+                        <p>{this.state.selectedPlace.brewery.location.city},
+                        {this.state.selectedPlace.brewery.location.state},
+                        {this.state.selectedPlace.brewery.location.postalCode}</p>
+                        </div>
                     ) : (
                         <h3>Brewery Not Loaded</h3>
                     )}
