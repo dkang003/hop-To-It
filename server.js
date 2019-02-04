@@ -41,10 +41,6 @@ app.get('/test', (req, res) => {
         })
 })
 
-// app.get('/test/:id', (req, res) => {
-
-// })
-
 
 
 app.listen(PORT, (err) => {
