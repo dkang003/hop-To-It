@@ -54,7 +54,7 @@ export class MapContainer extends Component {
                 <InfoWindow
                 marker = {this.state.activeMarker}
                 visible = {this.state.showingInfoWindow}>
-                <div>
+                <div className="infoWindow">
                     { this.state.selectedPlace.brewery
                     ? (
                         <div>

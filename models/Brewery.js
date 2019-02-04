@@ -1,8 +1,7 @@
 const
     mongoose = require('mongoose'),
     brewerySchema = new mongoose.Schema({
-        brandId: {type: String, required: true},
-        locationId: {type: String, required: true},
+        brewId: {type: String, required: true},
         photos: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Photo'}], // Photo Schema *BONUS*

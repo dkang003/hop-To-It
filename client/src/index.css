@@ -1,3 +1,6 @@
+/* font-family: 'Open Sans', sans-serif;
+font-family: 'Economica', sans-serif; */
+
 body {
   margin: 0;
   padding: 0;
@@ -6,6 +9,53 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("https://i.imgur.com/zkS8FQV.jpg");
+  background-size: cover; 
+  height: 100vh;
+  background-position: center;
+  background-repeat: repeat;
+}
+h1, h2 {
+  color: white;
+  font-family: 'Coda', cursive;
+}
+h3, h5 {
+  color: slategray;
+  font-family: 'Coda', cursive;
+}
+
+#nav {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Coda', cursive;
+}
+
+.nav-link:link {
+  color: #fff;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  text-decoration: none;
+}
+.nav-link:visited {
+  color: #fff;
+}
+.nav-link:hover {
+  color: yellow;
+}
+.nav-link:active {
+  color: teal;
+}
+
+.activeRoute {
+  background-color: yellow;
+  border-bottom: 0.4rem solid teal;
+  cursor: not-allowed;
 }
 
 code {
