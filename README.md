@@ -25,6 +25,7 @@ Front-end Packages installed:
 1. Passing current user as props to our profile page
 2. Modeling our Brewery and Photo models
 3. Axios CORS block
+4. Pinging our DB from the React front end and passding data from front end to back end
 
 
 ## Things I didn't get to do/finish:
