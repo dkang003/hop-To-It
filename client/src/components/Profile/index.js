@@ -7,32 +7,46 @@ import './Profile.css'
 class Profile extends Component {
     state = {
         favorites: [],
-        allBreweries:  [],
+        venues:  [],
         loading: true
     }
 
     async componentDidMount() {
         let { currentUser } = this.props
         
-        // Ping Foursquare API to retrieve allBreweries info
-        await axios.get('/test')
-            .then(res => {
-                this.setState({ allBreweries: res.data.response.venues })
-            }).catch(err => {
-                debugger
+        try {
+            let { data: { response: { venues } }} = await axios.get('/test');
+            let { data: { payload } } = await axios.get(`/api/users/${currentUser._id}`);
+            this.setState({ 
+                venues,
+                user: payload, 
+                favorites: payload.favorites, 
+                loading: false 
             })
+        } catch(err) {
+            console.log(err);
+        }
 
-        // Ping our API to retrieve currentUser info
-        await axios.get(`/api/users/${currentUser._id}`)
-            .then(({ data }) => {
-                this.setState({ user: data.payload, favorites: data.payload.favorites, loading: false })
-            }).catch(err => {
-                debugger
-            })
+
+        // // Ping Foursquare API to retrieve venues info
+        // axios.get('/test')
+        //     .then(res => {
+        //         this.setState({ allBreweries: res.data.response.venues })
+        //     }).catch(err => {
+        //         debugger
+        //     })
+
+        // // Ping our API to retrieve currentUser info
+        // axios.get(`/api/users/${currentUser._id}`)
+        //     .then(({ data }) => {
+        //         this.setState({ user: data.payload, favorites: data.payload.favorites, loading: false })
+        //     }).catch(err => {
+        //         debugger
+        //     })
     }
 
     render() {
-        let { user, loading, favorites, allBreweries } = this.state;
+        let { user, loading, favorites, venues } = this.state;
 
         // Loop through allBreweries to search and retrieve info using brewId in user's favorites
         var filteredBrewery = [];
@@ -40,9 +54,9 @@ class Profile extends Component {
             var id = favorites[i];
             // debugger
             // For each ID in favorites, find the object in allBreweries that has a matching ID
-            allBreweries.filter((element) => {
+            venues.filter((element) => {
                 if (element.id === id) {
-                    // If the element ID from the allBreweries array matches the Favorites ID, then save to
+                    // If the element ID from the venues array matches the Favorites ID, then save to
                     // our filteredBrewery array
                     filteredBrewery.push(element)
                     // debugger

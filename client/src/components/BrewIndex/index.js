@@ -17,13 +17,13 @@ export default class BrewIndex extends Component {
 
         axios('/test')
         .then(res => { 
-            
             this.setState({ breweries: res.data.response.venues })
         })
         .catch(err => {
             debugger
         })
         this.setState({ currentUser: this.props.currentUser})
+        
     }   
 
     render() {
