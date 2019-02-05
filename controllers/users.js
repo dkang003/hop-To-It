@@ -13,7 +13,7 @@ module.exports = {
         User.findById(req.params.id, (err, user) => {
             if (err) res.json({ message: "ERROR", payload: null, code: err.code })
             res.json({ message: "SUCCESS", payload: user })
-        })
+            })      
     },
     create: (req, res) => {
         User.create(req.body, (err, newUser) => {

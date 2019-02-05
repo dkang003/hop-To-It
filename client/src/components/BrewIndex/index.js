@@ -3,7 +3,7 @@ import axios from 'axios';
 import Brewery from '../Brewery';
 import Map from '../Map';
 import './brewIndex.css';
-import { Link } from 'react-router-dom';
+
 
 
 export default class BrewIndex extends Component {
@@ -31,35 +31,33 @@ export default class BrewIndex extends Component {
         let { currentUser } = this.props;
 
         return(
-            <div className="container">
-                <h1>BREWERY INDEX</h1>
+            <div className="grid container">
+                <h1 className="brewIndexTitle">BREWERY INDEX</h1>
+                <aside className="aspect-ratio">/</aside>
+                <article>
+                    <div className="grid absolute-fill main">
+                        <div className="mapContainer aspect-ration">
+                            <Map breweries={breweries} />
+                        </div>
+                        <div className="breweriesContainer aspect-ration">
+                            <ul>
+                                { breweries.map((brewery, i) => {
+                                return <div key={i}>
+                                        
+                                        <Brewery 
+                                            key={i}
+                                            currentUser={ currentUser }
+                                            brewery={ brewery }
+                                            onClick={this.handleClick}
+                                        />
+                                    {/* <a href="/brewShow/${brewery.id}">{brewery.name}</a> */}
+                                    </div>
 
-                <div className="main">
-                    <div className="mapContainer">
-                        <Map breweries={breweries} />
+                                })}
+                            </ul>
+                        </div>
                     </div>
-                    <div className="breweriesContainer">
-                        <ul>
-                            { breweries.map((brewery, i) => {
-                            return <div key={i}>
-                                    <Link 
-                                        brewery={ brewery } 
-                                        to={`/brewShow/${brewery.id}`}>
-                                        {brewery.name}
-                                    </Link>
-                                    <Brewery 
-                                        key={i}
-                                        currentUser={ currentUser }
-                                        brewery={ brewery }
-                                        onClick={this.handleClick}
-                                    />
-                                {/* <a href="/brewShow/${brewery.id}">{brewery.name}</a> */}
-                                </div>
-
-                            })}
-                        </ul>
-                    </div>
-                </div>
+                </article>
             </div>
         )
     }
