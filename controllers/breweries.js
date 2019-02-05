@@ -11,7 +11,7 @@ module.exports = {
     },
 
     create: (req, res) => {
-        // console.log(req.body)
+        console.log(req.body)
         Brewery.create(req.body, (err, newBrewery) => {
             if (err) res.json({ success: false, err })
             res.json({ success: true, newBrewery })
@@ -25,20 +25,12 @@ module.exports = {
                 // res.json({success: true, addedUserToBrewery})
 
                 User.findById(req.user.id, (err, user) => {
+                    console.log(user)
                     user.favorites.push(newBrewery.id)
-                    // console.log(`User is : ${user}`)
-                    // console.log(`Req.Body is : ${req.body}`)
-                    // console.log(`Req.user is : ${req.user}`)
                     user.save(err => {
-                        // if (err) { 
-                        //     res.json({message: "I am line 34", err})
-                        // } else {
-                            // res.json({success: true, message: "Updated user saved"});
-                            console.log("User modified saved!")
-                        // }
+                        console.log('User added this brewery successfully.')
                     })
                 })
-
             })
                         
         })
@@ -53,15 +45,34 @@ module.exports = {
     },
 
     update: (req, res) => {
-        Brewery.findById(req.params.id, (err, updatedBrewery) => {
+            console.log(req.params)
+            console.log(req.user)
+            let user_id = req.user.id
+        Brewery.find({ brewId: req.params.id}, (err, brewery) => {
             if (err) res.json({ success: false, err })
-            Object.assign(updatedBrewery, req.body)
-            updatedBrewery.save((err, updatedBrewery) => {
-                if (err) res.json({ success: false, err })
-                res.json({ success: true, updatedBrewery })
+            console.log(brewery)
+            console.log(brewery[0].users)
+            // Check if user has already liked this brewery (see if userId exists in Brewery users' array)
+            let foundUser = brewery[0].users.find( id => id == user_id);
+            if (foundUser) res.json({ message: 'User already liked this brewery'});
+            // Push user's id into brewery users' array
+            else brewery[0].users.push(user_id);
+
+            // Save brewery with added user's id
+            brewery[0].save( err => {
+                // Find User's id
+                User.findById(user_id, (err, user) => {
+                    // Push brewery's id to user's favorites array
+                    user.favorites.push(brewery[0].id);
+                    // Save user's favorites array with added brewery id
+                    user.save(err => {
+                        console.log({message: `Brewery added to user's favorites array successfully`})
+                    })
+                })
             })
         })
     },
+    
 
     destroy: (req, res) => {
         Brewery.findByIdAndRemove(req.params.id, (err, deletedBrewery) => {

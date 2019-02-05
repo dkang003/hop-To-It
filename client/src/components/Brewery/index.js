@@ -27,7 +27,9 @@ export default class Brewery extends Component {
             let newBrewery = await axios.post(`/api/breweries`, {brewId: `${brewery.id}`})
         } else {
             // let currentBrewery = 
-            console.log("This brewery already exists in the DB")
+            // console.log("This brewery already exists in the DB")
+            debugger
+            let likeBrewery = await axios.patch(`/api/breweries/${brewery.id}`)
             debugger
         }
         debugger

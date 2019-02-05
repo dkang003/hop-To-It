@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from './NavBar';
+import Navbar from './Navbar';
 import './Layout.css';
 
 export default class Layout extends Component {

@@ -16,11 +16,14 @@ breweriesRouter.post('/', breweriesCtrl.create);
 // SHOW
 breweriesRouter.get('/:id', breweriesCtrl.show);
 
-// UPDATE
+// UPDATE / Like 
 breweriesRouter.patch('/:id', breweriesCtrl.update);
 
 // DELETE
 breweriesRouter.delete('/:id', breweriesCtrl.destroy);
+
+// // Like/favorite brewery
+// breweriesRouter.patch('/:id', breweriesCtrl.like);
 
 
 
