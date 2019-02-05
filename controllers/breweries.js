@@ -25,13 +25,20 @@ module.exports = {
                 // res.json({success: true, addedUserToBrewery})
 
                 User.findById(req.user.id, (err, user) => {
-                    console.log(user)
                     user.favorites.push(newBrewery.id)
+                    // console.log(`User is : ${user}`)
+                    // console.log(`Req.Body is : ${req.body}`)
+                    // console.log(`Req.user is : ${req.user}`)
                     user.save(err => {
-                        if (err) res.json({message: "I am line 31", err})
-                        res.json({success: true, message: "Updated user saved"})
+                        // if (err) { 
+                        //     res.json({message: "I am line 34", err})
+                        // } else {
+                            // res.json({success: true, message: "Updated user saved"});
+                            console.log("User modified saved!")
+                        // }
                     })
                 })
+
             })
                         
         })
