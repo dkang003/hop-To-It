@@ -47,6 +47,7 @@ module.exports = {
 
     update: (req, res) => {
             let user_id = req.user.id
+            let brewId = req.params.id
         Brewery.find({ brewId: req.params.id}, (err, brewery) => {
             if (err) res.json({ success: false, err })
             // Check if user has already liked this brewery (see if userId exists in Brewery users' array)
@@ -59,9 +60,11 @@ module.exports = {
             brewery[0].save( err => {
                 // Find User's id
                 User.findById(user_id, (err, user) => {
-                    // Push brewery's id to user's favorites array
-                    debugger
-                    user.favorites.push(brewery[0].brewId);
+                    let foundBrewery = user.favorites.find( id => id == brewId)
+                    
+                    if (foundBrewery) console.log("User already liked this brewery");
+                    // // Push brewery's id to user's favorites array
+                    else user.favorites.push(brewId);
                     // Save user's favorites array with added brewery id
                     user.save(err => {
                         console.log({message: `Brewery added to user's favorites array successfully`})
