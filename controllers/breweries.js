@@ -53,6 +53,11 @@ module.exports = {
             // Check if user has already liked this brewery (see if userId exists in Brewery users' array)
             let foundUser = brewery[0].users.find( id => id == user_id);
             if (foundUser) console.log("User already liked this brewery");
+                // Set logic to UNLIKE brewery
+            
+            
+            
+            
             // Push user's id into brewery users' array
             else brewery[0].users.push(user_id);
 
