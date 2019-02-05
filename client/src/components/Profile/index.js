@@ -4,8 +4,6 @@ import axios from 'axios';
 import './Profile.css'
 
 
-
-
 class Profile extends Component {
     state = {
         favorites: [],
