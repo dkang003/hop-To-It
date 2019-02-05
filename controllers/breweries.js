@@ -49,33 +49,54 @@ module.exports = {
             let user_id = req.user.id
             let brewId = req.params.id
         Brewery.find({ brewId: req.params.id}, (err, brewery) => {
+            let foundBrewery = brewery[0]
             if (err) res.json({ success: false, err })
             // Check if user has already liked this brewery (see if userId exists in Brewery users' array)
-            let foundUser = brewery[0].users.find( id => id == user_id);
-            if (foundUser) console.log("User already liked this brewery");
+            let foundUser = foundBrewery.users.find( id => id == user_id);
+            if (foundUser) {
+                let index = foundBrewery.users.indexOf(user_id)
+                console.log(index)
+                foundBrewery.users.splice(index, 1)
                 // Set logic to UNLIKE brewery
-            
-            
-            
-            
-            // Push user's id into brewery users' array
-            else brewery[0].users.push(user_id);
-
-            // Save brewery with added user's id
-            brewery[0].save( err => {
-                // Find User's id
+                // Remove user's ID from brewery's users array
+                foundBrewery.save(err => {
+                    if (err) res.json({ success: false, err })
+                    console.log('User has been removed from this brewery.')
+               
+                // Remove brewId from User's favorites array
                 User.findById(user_id, (err, user) => {
-                    let foundBrewery = user.favorites.find( id => id == brewId)
-                    
-                    if (foundBrewery) console.log("User already liked this brewery");
-                    // // Push brewery's id to user's favorites array
-                    else user.favorites.push(brewId);
-                    // Save user's favorites array with added brewery id
+                    if (err) res.json({ success: false, err })
+                    let brewIndex = user.favorites.indexOf(brewId)
+                    console.log(brewIndex)
+                    user.favorites.splice(brewIndex, 1)
                     user.save(err => {
-                        console.log({message: `Brewery added to user's favorites array successfully`})
+                        if (err) res.json({ success: false, err})
+                        console.log('Brewery has been unliked.')
                     })
                 })
             })
+           
+        // Push user's id into brewery users' array
+            } else { 
+                // Add user_id to the brewery's users array
+                foundBrewery.users.push(user_id);
+
+                // Save brewery with added user's id
+                foundBrewery.save( err => {
+                    // Find User's id
+                    User.findById(user_id, (err, user) => {
+                        // Check if the brewery id is in the user's favorites array
+                        let foundBrewery = user.favorites.find( id => id == brewId)
+                        if (foundBrewery) console.log("User already liked this brewery");
+                        // // Push brewery's id to user's favorites array
+                        else user.favorites.push(brewId);
+                        // Save user's favorites array with added brewery id
+                        user.save(err => {
+                            console.log({message: `Brewery added to user's favorites array successfully`})
+                        })
+                    })
+                })
+            }
         })
     },
     
