@@ -48,6 +48,7 @@ export default class BrewIndex extends Component {
                                             key={i}
                                             currentUser={ currentUser }
                                             brewery={ brewery }
+                                            breweries={ breweries }
                                             onClick={this.handleClick}
                                         />
                                     {/* <a href="/brewShow/${brewery.id}">{brewery.name}</a> */}

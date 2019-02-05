@@ -7,18 +7,38 @@ import { Link } from 'react-router-dom';
 export default class Brewery extends Component {
     state = {
         currentUser:null,
-        brewery:null
+        brewery:null,
+        breweries: [],
+        favorites: [],
+        like: false
     }
 
-    componentDidMount() {
-        let { currentUser, brewery } = this.props;
-        this.setState({ currentUser, brewery })
+    async componentDidMount() {
+        let { currentUser, brewery, breweries } = this.props;
+        try {
+            let { data: { payload } } = await axios.get(`/api/users/${currentUser._id}`);
+            this.setState({ favorites: payload.favorites })
+            // Check for a brewery to see if it exists as favorite
+            if (!this.state.favorites.indexOf(brewery.id)) {
+                this.setState({ like: true })
+            } 
+    
+        } catch(err) {
+            debugger
+        }
+        
+    }
+
+    likeStatus(id) {
 
     }
     
     handleSubmit = async (e) => {
         e.preventDefault();
         let { currentUser, brewery } = this.props;
+
+        this.setState({ like: !this.state.like })
+
 
         // show the individual brewery
         let res = await axios.get(`/api/breweries/${brewery.id}`)
@@ -43,13 +63,22 @@ export default class Brewery extends Component {
                     {brewery.name}
                 </Link>
                 <form onSubmit={this.handleSubmit} className=".button-small-black">
-                    <input
+                {/* If like is false, render this input */}
+                {  this.state.like == false
+                ?  (<input
                         type="submit"
                         name="id"
-                        placeholder="Like Me"
-                        value={brewery.id}
-                        
-                        />
+                        value="Like"
+                        />)
+                 : 
+                // If like is true, render this input 
+                    (<input
+                        type="submit"
+                        name="id"
+                        value="Unlike"
+                        />)
+                }
+
                 </form>
             </div>
         )
