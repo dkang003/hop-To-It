@@ -11,28 +11,46 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url("https://i.imgur.com/zkS8FQV.jpg");
   background-size: cover; 
-  height: 100vh;
+  height: 80vh;
   background-position: center;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 h1, h2 {
   color: white;
   font-family: 'Coda', cursive;
+
 }
 h3, h5 {
-  color: slategray;
+  color: white;
   font-family: 'Coda', cursive;
+  text-transform: uppercase;
+  margin-bottom: -1rem;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-kerning: 1.75rem;
 }
 
 #nav {
   display: flex;
   flex-direction: row;
+  justify-content: space-around; 
+  align-items: center;
   width: 100%;
   height: 100%;
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding-top: 2rem;
   font-family: 'Coda', cursive;
+}
+
+.aboutBox {
+  color: white;
+  background-color: rgba(0, 0, 0, .65);
+  margin: 15rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .nav-link:link {
@@ -45,16 +63,17 @@ h3, h5 {
 .nav-link:visited {
   color: #fff;
 }
-.nav-link:hover {
-  color: yellow;
+.nav-link:hover, {
+  color: teal;
 }
 .nav-link:active {
-  color: teal;
+  color: goldenrod;
 }
 
 .activeRoute {
-  background-color: yellow;
-  border-bottom: 0.4rem solid teal;
+  background-color: goldenrod;
+  border-bottom: 0.4rem solid goldenrod
+  ;
   cursor: not-allowed;
 }
 

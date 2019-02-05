@@ -41,7 +41,7 @@ class App extends Component {
                         return <Signup {...props} onSignupSuccess={this.onAuthSuccess} />
                     }} />
                     <Route exact path="/profile" render={(props) => {
-                        return <Profile currentUser={this.state.currentUser} />
+                        return <Profile {...props} currentUser={this.state.currentUser} />
                     }} />
                     <Route exact path="/edit" render={(props) => {
                         return <Edit {...props} currentUser={this.state.currentUser} />

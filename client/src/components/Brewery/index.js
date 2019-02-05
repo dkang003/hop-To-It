@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './Brewery.css';
+import { Link } from 'react-router-dom';
+
 
 export default class Brewery extends Component {
     state = {
@@ -32,13 +35,20 @@ export default class Brewery extends Component {
         let {brewery} = this.props;
         return (
             <div>
-                <h1>{brewery.name}</h1>
-                <form onSubmit={this.handleSubmit}>
+                <h3>{brewery.name}</h3>
+                <Link 
+                    className="nav-link"
+                    brewery={ brewery } 
+                    to={`/brewShow/${brewery.id}`}>
+                    {brewery.name}
+                </Link>
+                <form onSubmit={this.handleSubmit} className=".button-small-black">
                     <input
                         type="submit"
                         name="id"
                         placeholder="Like Me"
                         value={brewery.id}
+                        
                         />
                 </form>
             </div>
