@@ -61,7 +61,7 @@ module.exports = {
                 User.findById(user_id, (err, user) => {
                     // Push brewery's id to user's favorites array
                     debugger
-                    // user.favorites.push(brewery[0].id);
+                    user.favorites.push(brewery[0].brewId);
                     // Save user's favorites array with added brewery id
                     user.save(err => {
                         console.log({message: `Brewery added to user's favorites array successfully`})
