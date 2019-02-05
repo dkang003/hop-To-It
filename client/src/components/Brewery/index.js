@@ -29,10 +29,6 @@ export default class Brewery extends Component {
         
     }
 
-    likeStatus(id) {
-
-    }
-    
     handleSubmit = async (e) => {
         e.preventDefault();
         let { currentUser, brewery } = this.props;
@@ -62,9 +58,9 @@ export default class Brewery extends Component {
                     to={`/brewShow/${brewery.id}`}>
                     {brewery.name}
                 </Link>
-                <form onSubmit={this.handleSubmit} className=".button-small-black">
+                <form onSubmit={this.handleSubmit} className="button-small-black">
                 {/* If like is false, render this input */}
-                {  this.state.like == false
+                {  this.state.like === false
                 ?  (<input
                         type="submit"
                         name="id"
