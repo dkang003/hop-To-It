@@ -11,44 +11,49 @@ export default class Brewery extends Component {
     }
 
     componentDidMount() {
-        let { currentUser, brewery } = this.props;
-        this.setState({ currentUser, brewery })
+        let { currentUser, venue } = this.props;
+        this.setState({ currentUser, venue })
 
     }
     
     handleSubmit = async (e) => {
         e.preventDefault();
-        let { currentUser, brewery } = this.props;
+        let { currentUser, venue } = this.props;
 
-        // show the individual brewery
-        let res = await axios.get(`/api/breweries/${brewery.id}`)
-        // check the returned brewery array from our api
-        if (res.data.brewery.length === 0) {
-            // make a new brewery
-            let newBrewery = await axios.post(`/api/breweries`, {brewId: `${brewery.id}`})
-        } else {
-            let likeBrewery = await axios.patch(`/api/breweries/${brewery.id}`)
+        // show the individual venue
+        try {
+            let res = await axios.get(`/api/breweries/${venue.id}`)
+            // check the returned venue array from our api
+            if (res.data.brewery.length === 0) {
+            // make a new venue
+                let newBrewery = await axios.post(`/api/breweries`, {brewId: `${venue.id}`})
+            } else {
+                let likeBrewery = await axios.patch(`/api/breweries/${venue.id}`)
+            }
+        } catch(err) {
+            console.log(err);
         }
-    };
+    }
 
     render() {
-        let {brewery} = this.props;
+        let {venue} = this.props;
+
         return (
             <div>
-                <h3>{brewery.name}</h3>
+                <h3>{venue.name}</h3>
                 <Link 
                     className="nav-link"
-                    brewery={ brewery } 
-                    to={`/brewShow/${brewery.id}`}>
-                    {brewery.name}
+                    venue={ venue } 
+                    to={`/brewShow/${venue.id}`}>
+                    {venue.name}
                 </Link>
                 <form onSubmit={this.handleSubmit} className=".button-small-black">
                     <input
                         type="submit"
                         name="id"
                         placeholder="Like Me"
-                        value={brewery.id}
-                        
+                        value={venue.id}
+    
                         />
                 </form>
             </div>

@@ -28,7 +28,7 @@ export class MapContainer extends Component {
     };
 
     render() {
-        let { breweries } = this.props;
+        let { venues } = this.props;
         return(
             <div style={{ height: '30vh', width: '30vh'}}>
                 <Map google={this.props.google}
@@ -39,15 +39,15 @@ export class MapContainer extends Component {
                 }}
                 onClick={this.onMapClicked}
                 >
-            { breweries.map((brewery, i) => {
+            { venues.map((venue, i) => {
                 const index = i + 1;
                 return ( 
                 <Marker
                 onClick={this.onMarkerClick}
                 key={i}
                 label={index.toString()}
-                brewery={brewery}
-                position={ {lat: `${brewery.location.lat}`, lng: `${brewery.location.lng}`}} />
+                venue={venue}
+                position={ {lat: `${venue.location.lat}`, lng: `${venue.location.lng}`}} />
                 )
             })}
                
@@ -55,14 +55,14 @@ export class MapContainer extends Component {
                 marker = {this.state.activeMarker}
                 visible = {this.state.showingInfoWindow}>
                 <div className="infoWindow">
-                    { this.state.selectedPlace.brewery
+                    { this.state.selectedPlace.venue
                     ? (
                         <div>
-                        <h5>{this.state.selectedPlace.brewery.name}</h5>
-                        <p>{this.state.selectedPlace.brewery.location.address}</p>
-                        <p>{this.state.selectedPlace.brewery.location.city},
-                        {this.state.selectedPlace.brewery.location.state},
-                        {this.state.selectedPlace.brewery.location.postalCode}</p>
+                        <h5>{this.state.selectedPlace.venue.name}</h5>
+                        <p>{this.state.selectedPlace.venue.location.address}</p>
+                        <p>{this.state.selectedPlace.venue.location.city},
+                        {this.state.selectedPlace.venue.location.state},
+                        {this.state.selectedPlace.venue.location.postalCode}</p>
                         </div>
                     ) : (
                         <h3>Brewery Not Loaded</h3>

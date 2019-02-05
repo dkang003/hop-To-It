@@ -8,26 +8,30 @@ import './brewIndex.css';
 
 export default class BrewIndex extends Component {
     state = {
-        breweries: [],
+        venues: [],
         currentUser: null
     }
 
-    componentDidMount () {
-        // let { breweries } = this.state;
-
-        axios('/test')
-        .then(res => { 
-            this.setState({ breweries: res.data.response.venues })
-        })
-        .catch(err => {
-            debugger
-        })
-        this.setState({ currentUser: this.props.currentUser})
+    async componentDidMount() {
+        let { currentUser } = this.props
         
-    }   
+        try {
+            let { data: { response: { venues } }} = await axios.get('/test');
+            let { data: { payload } } = await axios.get(`/api/users/${currentUser._id}`);
+            this.setState({ 
+                venues,
+                user: payload, 
+                favorites: payload.favorites, 
+                loading: false 
+            })
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
 
     render() {
-        let { breweries } = this.state;
+        let { venues } = this.state;
         let { currentUser } = this.props;
 
         return(
@@ -37,20 +41,20 @@ export default class BrewIndex extends Component {
                 <article>
                     <div className="grid absolute-fill main">
                         <div className="mapContainer aspect-ration">
-                            <Map breweries={breweries} />
+                            <Map venues={venues} />
                         </div>
                         <div className="breweriesContainer aspect-ration">
                             <ul>
-                                { breweries.map((brewery, i) => {
+                                { venues.map((venue, i) => {
                                 return <div key={i}>
                                         
                                         <Brewery 
                                             key={i}
                                             currentUser={ currentUser }
-                                            brewery={ brewery }
+                                            venue={ venue }
                                             onClick={this.handleClick}
                                         />
-                                    {/* <a href="/brewShow/${brewery.id}">{brewery.name}</a> */}
+                                    {/* <a href="/brewShow/${venue.id}">{brewery.name}</a> */}
                                     </div>
 
                                 })}
