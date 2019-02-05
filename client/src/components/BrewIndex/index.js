@@ -33,7 +33,7 @@ export default class BrewIndex extends Component {
         return(
             <div className="grid container">
                 <h1 className="brewIndexTitle">BREWERY INDEX</h1>
-                <aside class="aspect-ratio">/</aside>
+                <aside className="aspect-ratio">/</aside>
                 <article>
                     <div className="grid absolute-fill main">
                         <div className="mapContainer aspect-ration">
