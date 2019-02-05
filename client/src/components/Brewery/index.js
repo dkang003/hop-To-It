@@ -16,23 +16,16 @@ export default class Brewery extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         let { currentUser, brewery } = this.props;
-        // debugger
+
         // show the individual brewery
         let res = await axios.get(`/api/breweries/${brewery.id}`)
-        // debugger
         // check the returned brewery array from our api
         if (res.data.brewery.length === 0) {
-            debugger
             // make a new brewery
             let newBrewery = await axios.post(`/api/breweries`, {brewId: `${brewery.id}`})
         } else {
-            // let currentBrewery = 
-            // console.log("This brewery already exists in the DB")
-            debugger
             let likeBrewery = await axios.patch(`/api/breweries/${brewery.id}`)
-            debugger
         }
-        debugger
     };
 
     render() {

@@ -25,10 +25,11 @@ module.exports = {
                 // res.json({success: true, addedUserToBrewery})
 
                 User.findById(req.user.id, (err, user) => {
-                    console.log(user)
-                    user.favorites.push(newBrewery.id)
+                    console.log(newBrewery)
+                    // what we want is to push newBrewery brew_id so we can ping 4square API
+                    user.favorites.push(newBrewery.brewId)
                     user.save(err => {
-                        console.log('User added this brewery successfully.')
+                        console.log('User added this brewery successfully.')  
                     })
                 })
             })
@@ -45,16 +46,12 @@ module.exports = {
     },
 
     update: (req, res) => {
-            console.log(req.params)
-            console.log(req.user)
             let user_id = req.user.id
         Brewery.find({ brewId: req.params.id}, (err, brewery) => {
             if (err) res.json({ success: false, err })
-            console.log(brewery)
-            console.log(brewery[0].users)
             // Check if user has already liked this brewery (see if userId exists in Brewery users' array)
             let foundUser = brewery[0].users.find( id => id == user_id);
-            if (foundUser) res.json({ message: 'User already liked this brewery'});
+            if (foundUser) console.log("User already liked this brewery");
             // Push user's id into brewery users' array
             else brewery[0].users.push(user_id);
 
@@ -63,7 +60,8 @@ module.exports = {
                 // Find User's id
                 User.findById(user_id, (err, user) => {
                     // Push brewery's id to user's favorites array
-                    user.favorites.push(brewery[0].id);
+                    debugger
+                    // user.favorites.push(brewery[0].id);
                     // Save user's favorites array with added brewery id
                     user.save(err => {
                         console.log({message: `Brewery added to user's favorites array successfully`})

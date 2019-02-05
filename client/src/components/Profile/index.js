@@ -7,21 +7,51 @@ import axios from 'axios';
 class Profile extends Component {
     state = {
         // email: "", 
-        // favorites: [],
+        favorites: [],
+        allBreweries: [],
         // name: "",
         loading: true
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let { currentUser } = this.props
-        axios.get(`/api/users/${currentUser._id}`)
-            .then(({ data })  => {
-                this.setState({ user: data.payload, loading: false})
-            })
+
+        await axios.get('/test')
+        .then(res => {
+            debugger
+            this.setState({ allBreweries: res.data.response.venues })
+        }).catch(err => {
+            debugger
+        })
+
+        // axios('/test')
+        // .then(res => { 
+            
+        //     this.setState({ breweries: res.data.response.venues })
+        // })
+        // .catch(err => {
+        //     debugger
+        // })
+        // this.setState({ currentUser: this.props.currentUser})
+
+        await axios.get(`/api/users/${currentUser._id}`)
+        .then(({ data })  => {
+            this.setState({ user: data.payload, favorites: data.payload.favorites, loading: false})
+            debugger
+        }).catch(err => {
+            debugger
+        })
+
+        debugger
     }
 
+
+
+
     render () {
-        let { user, loading } = this.state;
+        let { user, loading, favorites, allBreweries } = this.state;
+        debugger
+        // user.favorites is the array of users favorite breweries by mongo id
         if (loading) return <div></div>
         return (
             <div>

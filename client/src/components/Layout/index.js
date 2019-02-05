@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar';
+import NavBar from './NavBar';
 import './Layout.css';
 
 export default class Layout extends Component {
@@ -8,7 +8,7 @@ export default class Layout extends Component {
         
         return (
             <div>
-                <Navbar currentUser={this.props.currentUser} />
+                <NavBar currentUser={this.props.currentUser} />
                 <main className="container">
                     { this.props.children }
                 </main>

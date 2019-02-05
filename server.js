@@ -36,8 +36,7 @@ app.get('/test', (req, res) => {
             res.json(response.data)
         })
         .catch(err => {
-            console.log(err)
-            // res.json({ err })
+            debugger
         })
 })
 
