@@ -11,7 +11,8 @@ const
     usersRoutes = require('./routes/users.js'),
     cors = require('cors'),
     breweriesRoutes = require('./routes/breweries.js'),
-    axios = require('axios');
+    axios = require('axios'),
+    path= require ('path');
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, (err) => {
     console.log(err || `Connected to mLab`)
@@ -20,7 +21,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, (err) => {
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, "client", "build")))
 app.get('/api', (req,res) => {
     res.json({ message: "API ROOT" })
 });
@@ -28,6 +29,7 @@ app.get('/api', (req,res) => {
 
 app.use('/api/users', usersRoutes);
 app.use('/api/breweries', breweriesRoutes);
+
 
 app.get('/test', (req, res) => {
     // axios('http://api.brewerydb.com/v2/locations/?key=e64cdf34c138b3ad00ce4a5de938d8f1')
@@ -41,6 +43,9 @@ app.get('/test', (req, res) => {
 })
 
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+})
 
 app.listen(PORT, (err) => {
     console.log(err || `Server running on port ${PORT}`) 
