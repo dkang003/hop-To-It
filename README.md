@@ -3,6 +3,8 @@
 ## What is it?
 Full-Stack app using MERN stack.  People can discover breweries near them or in specified area.
 
+ZAC WAS HERE
+
 ## Technologies Used:
 HTML5 | CSS3 | Javascript | Git | Github | Heroku | MongoDB | Express | React.js | Node.js
 
