@@ -26,7 +26,6 @@ export default class Brewery extends Component {
         } catch(err) {
             debugger
         }
-        
     }
 
     handleSubmit = async (e) => {
@@ -36,13 +35,15 @@ export default class Brewery extends Component {
         this.setState({ like: !this.state.like })
 
 
-        // show the individual brewery
+        // Show the individual brewery
         let res = await axios.get(`/api/breweries/${brewery.id}`)
-        // check the returned brewery array from our api
+        // Check the returned brewery array from our api
         if (res.data.brewery.length === 0) {
-            // make a new brewery
+            // Make a new brewery
             let newBrewery = await axios.post(`/api/breweries`, {brewId: `${brewery.id}`})
         } else {
+            // Patch brewery adding user id to Brewery's users array and Brewery to user's
+            // favorites array
             let likeBrewery = await axios.patch(`/api/breweries/${brewery.id}`)
         }
     };
