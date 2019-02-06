@@ -17,12 +17,12 @@ body {
   background-attachment: fixed;
 }
 h1, h2 {
-  color: white;
+  color: lightgray;
   font-family: 'Coda', cursive;
 
 }
 h3, h5 {
-  color: white;
+  color: slategray;
   font-family: 'Coda', cursive;
   text-transform: uppercase;
   margin-bottom: -1rem;

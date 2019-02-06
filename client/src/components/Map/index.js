@@ -59,7 +59,8 @@ export class MapContainer extends Component {
                     ? (
                         <div>
                         <h5>{this.state.selectedPlace.brewery.name}</h5>
-                        <p>{this.state.selectedPlace.brewery.location.address}</p>
+                        <p><a href={`https://www.google.com/maps/place/${this.state.selectedPlace.brewery.location.formattedAddress}`} target="_blank">
+                        {this.state.selectedPlace.brewery.location.address}</a></p>
                         <p>{this.state.selectedPlace.brewery.location.city},
                         {this.state.selectedPlace.brewery.location.state},
                         {this.state.selectedPlace.brewery.location.postalCode}</p>
