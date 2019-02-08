@@ -75,7 +75,6 @@ export default class Brewery extends Component {
                         value="Unlike"
                         />)
                 }
-
                 </form>
             </div>
         )
